@@ -1,0 +1,42 @@
+<div id="searshbyMontant">
+    <form  [formGroup]="searchByPhoneForm" >
+      <div>
+        <ion-item>
+            <ion-label> <ion-icon name="calendar" style="zoom:2.0"></ion-icon></ion-label> 
+            <ion-datetime [displayFormat]="dateForma" name="dateTest" formControlName="datetime"></ion-datetime>
+        </ion-item>
+    </div>
+      <div>
+        <span> طبيعة العملية </span>
+        <input formControlName="no" type="radio" value="irsal">
+        <label class="w3-green">
+          <span> ارسال الي </span> <span> ... </span><span> صادرة</span>
+        </label> <br>
+        <input formControlName="no" type="radio" value="istikbal">
+        <label class="w3-yellow">
+          <span> استقبال من </span><span>...</span><span> واردة</span>
+        </label><br>
+      </div>
+      <div>
+        <input formControlName="montant" [class.w3-border-red]="searchByPhoneForm.get('montant').invalid"
+          placeholder="المبلغ" 
+          type="number">
+      </div>
+      <div>
+        <ion-button (click)="searsh()">  بحث </ion-button>
+      </div>
+  
+  
+  
+      <div *ngIf="!isFormReady" class="w3-text-red">
+        املئ البيات بشكل صحيح
+      </div>
+      <br>
+  
+  
+  
+  
+    </form>
+  
+  
+  </div>

@@ -1,0 +1,139 @@
+<div> 
+    <form [formGroup]="messageForm">
+        <div> 
+            <p>
+              طبيعة العملية
+            </p> 
+            <div>
+              <input formControlName="no" type="radio" value="irsal" >
+              <label class="w3-green"> 
+                  <span>
+                       ارسال الي
+                  </span> 
+                  
+                  <span>
+                    ...
+                </span>
+                <span>  
+                    صادرة
+                </span>
+              </label> <br>
+            
+              <input formControlName="no" type="radio" value="istikbal" >
+              <label class="w3-yellow">
+                  <span>
+                      استقبال من 
+                 </span>
+                 <span>
+                     ...
+                 </span>
+                 <span> 
+                     واردة
+                 </span>
+              </label><br>
+            </div> 
+                <ion-item>
+                    <ion-label> 
+                        <ion-icon name="calendar" style="zoom:2.0" ></ion-icon>
+                    </ion-label>
+                    <ion-datetime 
+                    [displayFormat]="'DD/MM/YYYY'" 
+                    name="dateTest" 
+                    formControlName="datetime"
+                     
+                    ></ion-datetime>
+                  </ion-item>
+        
+            
+        </div>
+        <div>
+            <br>
+            <small [class.w3-hide]="messageForm.get('year').valid" class="w3-text-red">
+                حدد السنة
+                <br></small>
+            <small [class.w3-hide]="messageForm.get('month').valid" class="w3-text-red">
+                حدد الشهر
+                <br> </small>
+            <small [class.w3-hide]="messageForm.get('day').valid" class="w3-text-red">
+                حدد اليوم علي اﻷكثر
+                <span> {{max_day_per_this_month}}</span>
+            </small>
+        </div>
+  
+        <div>
+            <input [class.w3-border-red]="messageForm.get('destination').invalid && 
+            messageForm.get('destination').touched " 
+            formControlName="destination" 
+            class="  w3-border w3-light-grey"
+            placeholder="الوجهة"
+                required>
+                 
+   
+        </div>
+  
+        <div>
+            <small [class.w3-hide]="messageForm.get('destination').valid ||
+            messageForm.get('destination').untouched" class="w3-text-red">
+                من الضروري اختيار وجهة
+            
+            <br></small>
+        </div>
+  
+        <div>
+            <input placeholder=" الهاتف" [class.w3-border-red]="messageForm.get('tel').invalid && 
+            messageForm.get('tel').touched " formControlName="tel" 
+            class="w3-input w3-border w3-light-grey"
+             type="number" min="20000000"
+                max="49999999" required>
+  
+  
+            <input placeholder="المبلغ" formControlName="montant" [class.w3-border-red]="messageForm.get('montant').invalid && 
+            messageForm.get('montant').touched " 
+            class="w3-input w3-border w3-light-grey"
+             type="number" min="0" required>
+            
+            <input placeholder="الفائدة لي" [class.w3-border-red]="messageForm.get('lemien').invalid && 
+            messageForm.get('lemien').touched " formControlName="lemien" 
+            class="w3-input w3-border w3-light-grey" type="number" min="0"
+                required>
+  
+  
+            <input placeholder="الفائدة له" [class.w3-border-red]="messageForm.get('lesien').invalid && 
+            messageForm.get('lesien').touched " formControlName="lesien" 
+            class="w3-input w3-border w3-light-grey" type="number" min="0"
+                required>
+  
+        </div>
+        <div>
+            <small [class.w3-hide]="messageForm.get('tel').valid ||
+            messageForm.get('tel').untouched" class="w3-text-red">
+                من الضروري ادخال الهاتف في هذا الحقل من ثمانية ارقام يبدء باثنان تلاثة او اربعة
+                <br></small>
+            <small [class.w3-hide]="messageForm.get('montant').valid ||
+            messageForm.get('montant').untouched" class="w3-text-red">
+                من الضروري ادخال المبلغ في هذا الحقل
+                <br></small>
+            <small [class.w3-hide]="messageForm.get('lemien').valid ||
+            messageForm.get('lemien').untouched" class="w3-text-red">
+                من الضروري ادخال الفائدة لي في هذا الحقل
+                <br></small>
+            <small [class.w3-hide]="messageForm.get('lesien').valid ||
+            messageForm.get('lesien').untouched" class="w3-text-red">
+                من الضروري ادخال الفائدة له في هذا الحقل
+                <br></small>
+  
+        </div>
+        <div *ngIf="!is_form_ready" class="w3-text-red">
+            قم بملئ اﻷستمارة بشكل صحيح
+        </div>
+        <ion-button (click)="postData()">
+            تسجيل
+          </ion-button>
+          
+          <ion-button (click)="no()" class="w3-border w3-black">
+            الغاء
+          </ion-button>
+    </form>
+  </div>
+  
+  

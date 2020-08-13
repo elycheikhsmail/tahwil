@@ -1,0 +1,104 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons> 
+      <ion-title size="large">
+        الصندوق
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+    <div>
+        <ion-button (click)="gotoCaisse()">
+            عودة الي تقرير الصندوق
+        </ion-button>
+    </div>
+    <div>
+        <ion-button (click)="activateMode('add')" [class.w3-text-yellow]="modesEnable.add">
+            +
+        </ion-button>
+
+        <ion-button (click)="activateMode('searchByMonth')" [class.w3-text-yellow]="modesEnable.searchByMonth">
+            <span>
+                الشهر
+            </span>
+            <ion-icon name="search" style="zoom:2.0"></ion-icon>
+        </ion-button>
+        <ion-button (click)="activateMode('searchByDay')" [class.w3-text-yellow]="modesEnable.searchByDay">
+            <span>
+                اليوم
+            </span>
+            <ion-icon name="search" style="zoom:2.0"></ion-icon>
+        </ion-button>
+
+        <app-date-search (eventSearsh)="searchByDay($event)" [params]="dateParams" *ngIf="modesEnable.searchByDay">
+        </app-date-search>
+        <app-caisse-search-month (eventSearsh)="searchByMonth($event)" [params]="dateParams"
+            *ngIf="modesEnable.searchByMonth"></app-caisse-search-month>
+        <app-caisse-add *ngIf="modesEnable.add"></app-caisse-add>
+    </div>
+
+
+
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                التاريخ
+            </ion-col>
+
+            <ion-col>
+                دفع
+            </ion-col>
+
+            <ion-col>
+                سحب
+            </ion-col>
+
+            <ion-col>
+            </ion-col>
+
+            <ion-col>
+                تعليق
+            </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let caisseExchange of itemService.selectedExchageItems">
+            <ion-col>
+                {{caisseExchange.day}}/
+                {{caisseExchange.month}}/
+                {{caisseExchange.year}}
+            </ion-col>
+            <ion-col>
+                <span *ngIf="caisseExchange.no =='d'">
+                    {{caisseExchange.montant}}
+                </span>
+            </ion-col>
+
+            <ion-col>
+                <span *ngIf="caisseExchange.no =='s'">
+                    {{caisseExchange.montant}}
+                </span>
+            </ion-col>
+
+
+            <ion-col>
+                <ion-icon name="create" style="zoom:2.0" (click)="update(caisseExchange)"></ion-icon>
+                <ion-icon name="trash" style="zoom:2.0" (click)="delete(caisseExchange)"></ion-icon>
+            </ion-col>
+
+
+            <ion-col>
+                {{caisseExchange.commentaire}}
+            </ion-col>
+
+        </ion-row>
+    </ion-grid>
+    <div>
+        <ion-button (click)="deleteAll()" expand="block" fill="clear" shape="round">
+            <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+            حذف جميع المسجل في الصندوق
+        </ion-button>
+    </div>
+
+</ion-content>

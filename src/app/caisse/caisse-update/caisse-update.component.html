@@ -1,0 +1,53 @@
+ 
+<div> 
+<form [formGroup]="caisseForm"  >
+  
+  <div>
+    <ion-item>
+        <ion-label> <ion-icon name="calendar" style="zoom:2.0"></ion-icon></ion-label> 
+        <ion-datetime [displayFormat]="dateForma" name="dateTest" formControlName="datetime"></ion-datetime>
+    </ion-item>
+</div>
+  <div> 
+  <input formControlName="no" type="radio" value="d">
+  <label class="w3-green"> دفع في الصندوق
+  </label> <br>
+
+  <input formControlName="no" type="radio" value="s">
+  <label class="w3-yellow">
+    سحب من الصندوق
+  </label><br>
+</div>
+         
+        
+       
+          <input formControlName="montant" 
+          placeholder="المبلغ"
+          [class.w3-border-red]="caisseForm.get('montant').invalid && 
+          caisseForm.get('montant').touched "
+           class="w3-input w3-border  w3-light-grey" type="number" min="0"
+          required>
+          <input formControlName="commentaire" 
+          placeholder="تعليق"
+          [class.w3-border-red]="caisseForm.get('commentaire').invalid && 
+          caisseForm.get('commentaire').touched "
+           class="w3-input w3-border  w3-light-grey" type="text" min="0"
+          required>
+          
+      <ion-button (click)="update()">
+        تسجيل
+      </ion-button>
+      
+      <ion-button (click)="no()" class="w3-border w3-black">
+        الغاء
+      </ion-button>
+          <small [class.w3-hide]="caisseForm.get('montant').valid ||
+        caisseForm.get('montant').untouched" class="w3-text-red">
+        من الضروري ادخال المبلغ في هذا الحقل
+      </small>
+
+
+
+    <div>
+
+

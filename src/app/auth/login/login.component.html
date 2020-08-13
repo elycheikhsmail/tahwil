@@ -1,0 +1,30 @@
+<div>
+  <h2>
+    دخول
+  </h2>
+
+  <form [formGroup]="loginForm">
+
+    <input formControlName="name" 
+    class="w3-input"
+    placeholder="الاسم" type="text" required>
+    <hr>
+    <input formControlName="password" 
+    class="w3-input"
+    type="password" placeholder="كلمة السر" required>
+
+    <div *ngIf="!isAuthSuccess">
+      الاسم او كلمة السر غير صحيح
+    </div>
+    <div *ngIf="!isLoginFormValid">
+      ادخل المعلومات بطريقة صحيحة
+    </div>
+
+
+    <ion-button (click)="authentificateUser()">
+      دخول
+    </ion-button>
+  </form>
+
+
+</div>

@@ -1,0 +1,105 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons> 
+    <ion-title size="large">
+      الرساثل
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid> 
+    <ion-row>
+      <ion-button (click)="toAddMode()"   [class.w3-text-yellow]="modes.add"> + </ion-button>
+      <ion-button (click)="activateMode('seachByDate')"  [class.w3-text-yellow]="modes.seachByDate">
+        <span> التاريخ  </span>
+        <ion-icon name="search" style="zoom:1.0"></ion-icon>
+      </ion-button>
+      <ion-button (click)="activateMode('searchByMobile')" [class.w3-text-yellow]="modes.searchByMobile">
+        <span>    الهاتف</span>
+        <ion-icon name="search" style="zoom:1.0"></ion-icon>
+      </ion-button>
+      <ion-button (click)="activateMode('searchByAmount')" [class.w3-text-yellow]="modes.searchByAmount">
+         
+        <span>  
+          المبلغ
+        </span>
+        <ion-icon name="search" style="zoom:1.0"></ion-icon>
+      </ion-button>
+    </ion-row>
+    <ion-row >
+      <app-message-seaersh-one *ngIf="modes.seachByDate"></app-message-seaersh-one>
+      <app-search-by-phone *ngIf="modes.searchByMobile"></app-search-by-phone>
+      <app-search-by-montant *ngIf="modes.searchByAmount"></app-search-by-montant>
+      <app-message-add (eventHide)="toSearchMode()" *ngIf="modes.add"></app-message-add>
+    </ion-row>
+
+    <ion-row>
+      <span>
+        عدد الرساثل
+      </span>
+      <span>
+        {{ messageService.selectedItems.length }}
+      </span>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        الهاتف
+      و
+        الوجهة
+      </ion-col>
+      
+      <ion-col>
+      المبلغ
+      </ion-col>
+      
+      <ion-col>
+        الفائدة لي
+      </ion-col>
+      
+      <ion-col>
+        الفائدة له
+      </ion-col>
+      
+      <ion-col>
+        تحكم
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngFor="let item of messageService.selectedItems">
+
+      <ion-col>
+        {{item.tel}}  
+    <br>
+        {{item.destination}}
+      </ion-col>
+      <ion-col>
+        {{item.montant}}
+      </ion-col>
+      <ion-col>
+        {{item.lemien}}
+      </ion-col>
+      <ion-col>
+        {{item.lesien}}
+      </ion-col>
+
+      <ion-col>
+        <ion-icon name="create" style="zoom:2.0" (click)="update(item)"></ion-icon>
+        <ion-icon name="trash" style="zoom:2.0" (click)="delete(item)"></ion-icon>
+      </ion-col>
+
+    </ion-row>
+
+
+  </ion-grid>
+  <div>
+    <ion-button (click)="deleteAll()" expand="block" fill="clear" shape="round">
+      حذف جميع الرسائل
+      <ion-icon name="trash" style="zoom:2.0" ></ion-icon>
+    </ion-button>
+   
+  </div>
+
+</ion-content>

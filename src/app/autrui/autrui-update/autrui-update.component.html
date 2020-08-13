@@ -1,0 +1,70 @@
+  
+<div> 
+  <form [formGroup]="caisseForm"  >
+    <div> 
+    <input formControlName="no" type="radio" value="d">
+    <label class="w3-green"> دفع في المؤسسة
+    </label> <br>
+  
+    <input formControlName="no" type="radio" value="s">
+    <label class="w3-yellow">
+      سحب من المؤسسة
+    </label><br>
+  </div>
+         
+            <input formControlName="day" [class.w3-border-red]="caisseForm.get('day').invalid" type="number" max="31"
+              min="1" required>
+      
+            <input formControlName="month" [class.w3-border-red]="caisseForm.get('month').invalid" type="number"
+              max="8" min="7" required>
+         
+            <input formControlName="year" [class.w3-border-red]="caisseForm.get('year').invalid" type="number" readonly
+              max="2020" min="2020" required>
+         
+            <input formControlName="montant" 
+            placeholder="المبلغ"
+            [class.w3-border-red]="caisseForm.get('montant').invalid && 
+            caisseForm.get('montant').touched "
+             class="w3-input w3-border  w3-light-grey" type="number" min="0"
+            required>
+            <input formControlName="commentaire" 
+            placeholder="تعليق"
+            [class.w3-border-red]="caisseForm.get('commentaire').invalid && 
+            caisseForm.get('commentaire').touched "
+             class="w3-input w3-border  w3-light-grey" type="text" min="0"
+            required>
+            
+        <ion-button (click)="update()">
+          تسجيل
+        </ion-button>
+        
+        <ion-button (click)="no()" class="w3-border w3-black">
+          الغاء
+        </ion-button>
+       
+       
+            <small [class.w3-hide]="caisseForm.get('day').valid" class="w3-text-red">
+              حدد اليوم علي اﻷكثر
+              <span> {{max_day_per_this_month}}</span>
+            </small>
+         
+            <small [class.w3-hide]="caisseForm.get('month').valid" class="w3-text-red">
+              حدد الشهر
+              <br> </small>
+  
+            <small [class.w3-hide]="caisseForm.get('year').valid" class="w3-text-red">
+              حدد السنة
+              <br></small>
+  
+          
+            <small [class.w3-hide]="caisseForm.get('montant').valid ||
+          caisseForm.get('montant').untouched" class="w3-text-red">
+          من الضروري ادخال المبلغ في هذا الحقل
+        </small>
+  
+  
+  
+      <div>
+  
+  
+  

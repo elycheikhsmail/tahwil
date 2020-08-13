@@ -1,0 +1,181 @@
+<h4>
+  تقرير الصندوق
+</h4>
+
+<app-date-search (eventSearsh)="s1($event)" [params]="dateParams"></app-date-search>
+ 
+<div *ngIf="!isFormReady">
+  املئ الاستمارة بشكل صحيح
+</div>
+
+<div *ngIf="isFormReady">
+   <div class="w3-text-red" *ngIf="!lengthMessage"  >
+     لا توجد رسائل في هدا اليوم
+   </div>
+
+  <table class="w3-table w3-striped" dir="rtl"   >
+    <tr *ngIf="lengthMessage" >
+      <th style="text-align:right;">
+        ط.ع
+      </th>
+      <th style="text-align:right;">
+        المبلغ
+      </th>
+      <th style="text-align:right;">
+        ف.لي
+      </th>
+      <th style="text-align:right;">
+        ف.له
+      </th>
+      <th style="text-align:right;">
+        <b>
+          المجموع
+        </b>
+
+      </th>
+
+    </tr>
+    <tr *ngIf="lengthMessage" >
+
+      <td style="text-align:right;">
+        ارسال
+      </td>
+      <td style="text-align:right;">
+        {{caisseTable.irsal.montant}}
+
+      </td>
+      <td style="text-align:right;">
+        {{caisseTable.irsal.lemien}}
+      </td>
+      <td style="text-align:right;">
+        {{caisseTable.irsal.lesien}}
+      </td>
+
+      <td style="text-align:right;">
+        <b>
+          {{totalIrsal}}
+
+        </b>
+      </td>
+    </tr>
+
+    <tr *ngIf="lengthMessage" >
+      <td style="text-align:right;">
+        استقبال
+      </td>
+      <td style="text-align:right;">
+
+        {{caisseTable.istikbal.montant}}
+      </td>
+      <td style="text-align:right;">
+        -
+      </td>
+      <td style="text-align:right;">
+        -
+      </td>
+
+      <td style="text-align:right;">
+        <b>
+          {{totalIstikbal}}
+        </b>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:right;">
+      </td>
+      <td style="text-align:right;">
+      </td>
+      <td style="text-align:right;">
+      </td>
+      <td style="text-align:right;">
+        الناتج اليومي
+
+      </td>
+
+      <td style="text-align:right;">
+        <b>
+          {{ennatij}}
+        </b>
+
+      </td>
+    </tr>
+
+
+    <tr>
+      <td style="text-align:right;">
+      </td>
+      <td style="text-align:right;">
+      </td>
+      <td style="text-align:right;">
+      </td>
+      <td style="text-align:right;">
+
+        رصيد اﻷمس
+
+      </td>
+
+      <td style="text-align:right;">
+        <b>
+          {{erressidYamiss}}
+
+        </b>
+
+      </td>
+    </tr>
+
+    <tr>
+      <td style="text-align:right;">
+      </td>
+      <td style="text-align:right;">
+      </td>
+      <td style="text-align:right;">
+      </td>
+      <td style="text-align:right;">
+
+
+        الدفعات
+      </td>
+
+      <td style="text-align:right;">
+        <b>
+          {{eddouvouaat}}
+
+        </b>
+
+      </td>
+    </tr>
+
+    <tr>
+      <td style="text-align:right;">
+      </td>
+      <td style="text-align:right;">
+      </td>
+      <td style="text-align:right;">
+      </td>
+      <td style="text-align:right;">
+        الرصيد اليوم
+
+      </td>
+
+      <td style="text-align:right;" class="w3-yellow">
+        <b>
+          {{erressidToday}}
+
+        </b>
+
+      </td>
+    </tr>
+
+
+  </table>
+
+
+  <ion-button (click)="addToCaisse()"  >
+    <span>
+      دفع
+    </span>
+    <span>/</span>
+    <span>
+      سحب
+    </span>
+  </ion-button>

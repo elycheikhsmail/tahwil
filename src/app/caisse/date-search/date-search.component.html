@@ -1,0 +1,15 @@
+<div>
+  <form [formGroup]="caisseSearshForm ">
+    <div>
+      <ion-item>
+          <ion-label> <ion-icon name="calendar" style="zoom:2.0"></ion-icon></ion-label> 
+          <ion-datetime [displayFormat]="dateForma" name="dateTest" formControlName="datetime"></ion-datetime>
+      </ion-item>
+  </div>
+    <ion-button (click)="searsh1()">
+      بحث
+    </ion-button>
+  </form>
+
+</div>
+

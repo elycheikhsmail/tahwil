@@ -1,0 +1,64 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons> 
+    <ion-title size="large"> 
+      الفاثدة
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" dir="rtl">
+  <div>
+    <form [formGroup]="vaiidaForm"> 
+    <label>   السنة </label>
+    <input formControlName="year" [class.w3-border-red]="vaiidaForm.get('year').invalid" 
+    type="number" max="2020" min="2020"     >  
+    <label>  الشهر </label>
+    <input formControlName="month" [class.w3-border-red]="vaiidaForm.get('month').invalid" 
+    type="number" max="8" min="7"   required> <br>
+    <label>  من يوم </label>
+    <input formControlName="day_start" [class.w3-border-red]="vaiidaForm.get('day_start').invalid" type="number" max="31" min="1"   required> 
+    <label>  الي غاية</label>
+    <input formControlName="day_end" [class.w3-border-red]="vaiidaForm.get('day_end').invalid" type="number" max="31" min="1"   required><br>
+    <small [class.w3-hide]="vaiidaForm.get('day_start').valid" class="w3-text-red">
+      حدد اليوم علي اﻷكثر
+      <span> {{max_day_per_this_month}}</span>
+    </small>
+    <small [class.w3-hide]="vaiidaForm.get('day_end').valid" class="w3-text-red">
+      حدد اليوم علي اﻷكثر
+      <span> {{max_day_per_this_month}}</span>
+    </small>
+
+    <small [class.w3-hide]="vaiidaForm.get('month').valid" class="w3-text-red">
+      حدد الشهر
+      <br> </small>
+
+    <small [class.w3-hide]="vaiidaForm.get('year').valid" class="w3-text-red">
+      حدد السنة
+      <br></small>
+     <br>
+
+    <ion-button (click)="searsh()">  بحث </ion-button>
+    </form>
+  </div> 
+ 
+
+  <ion-grid *ngIf="!isBeforSearsh">
+    <ion-row>
+      <ion-col> مجموع الفاثدة في الرسائل الواردة </ion-col>
+      <ion-col>  {{ vaiidaRapport.vaiida_warida }} </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>   مجموع الفاثدة في الرسائل الصادرة  </ion-col>
+      <ion-col> {{ vaiidaRapport.vaiida_sadira }} </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>  اجمالي الفائدة  </ion-col>
+      <ion-col class="w3-yellow">  {{ vaiidaRapport.vaiida_global }}  </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

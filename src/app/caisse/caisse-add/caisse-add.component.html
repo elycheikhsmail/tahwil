@@ -1,0 +1,47 @@
+<div>
+  <form [formGroup]="caisseForm">
+    
+  <div>
+    <ion-item>
+        <ion-label> <ion-icon name="calendar" style="zoom:2.0"></ion-icon></ion-label> 
+        <ion-datetime [displayFormat]="dateForma" name="dateTest" formControlName="datetime"></ion-datetime>
+    </ion-item>
+</div>
+    <div>
+      <span>
+        طبيعة العملية
+      </span>
+      <input formControlName="no" type="radio" value="d" required>
+      <label class="w3-green"> دفع في الصندوق
+      </label>
+       
+      <input formControlName="no" type="radio" value="s">
+      <label class="w3-yellow">
+        سحب من الصندوق
+      </label><br>
+    </div> 
+
+    <input formControlName="montant" placeholder="المبلغ" [class.w3-border-red]="caisseForm.get('montant').invalid && 
+          caisseForm.get('montant').touched " class="w3-input w3-border  w3-light-grey" type="number" min="0" required>
+    <input formControlName="commentaire" placeholder="تعليق" [class.w3-border-red]="caisseForm.get('commentaire').invalid && 
+          caisseForm.get('commentaire').touched " class="w3-input w3-border  w3-light-grey" type="text">
+
+    <small [class.w3-hide]="caisseForm.get('no').valid" class="w3-text-red">
+      حدد طبيعة العملية
+      <br></small>
+
+
+    <small [class.w3-hide]="caisseForm.get('montant').valid ||
+        caisseForm.get('montant').untouched" class="w3-text-red">
+      من الضروري ادخال المبلغ في هذا الحقل
+    </small> 
+      <div *ngIf="!isFormReady" class="w3-text-red">
+        املئ كل المعلومات المطلوبة بشكل صحيح
+      </div>
+
+
+    <ion-button (click)="add()">
+      اضافة
+    </ion-button>
+
+<div>
